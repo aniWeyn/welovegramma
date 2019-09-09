@@ -4,7 +4,6 @@
       {{list[index].infinitive}}
       </div>
     <div class="wrapper">
-
       <div>
       io
       </div>
@@ -12,7 +11,7 @@
       <input type="text" name="io" v-model="io" :class="{'good':io == list[index].io}" />
       </div>
       <div>
-      {{list[index].io}}
+      <span :class="{'hidden': hidden}">{{list[index].io}}</span>
       </div>
       <div>
       tu
@@ -21,7 +20,7 @@
       <input type="text" name="tu" v-model="tu" :class="{'good':tu == list[index].tu}"/> 
             </div>
       <div>
-        {{list[index].tu}}
+       <span :class="{'hidden': hidden}"> {{list[index].tu}}</span>
               </div>
       <div>
       lui/lei
@@ -30,7 +29,7 @@
       <input type="text" name="lui/lei" v-model="lei" :class="{'good':lei == list[index].lei}"/>
             </div>
       <div>
-        {{list[index].lei}}
+       <span :class="{'hidden': hidden}"> {{list[index].lei}}</span>
               </div>
       <div>
       noi
@@ -39,7 +38,7 @@
       <input type="text" name="noi" v-model="noi" :class="{'good':noi == list[index].noi}" />
             </div>
       <div>
-        {{list[index].noi}}
+       <span :class="{'hidden': hidden}"> {{list[index].noi}}</span>
               </div>
       <div>
       voi
@@ -48,7 +47,7 @@
       <input type="text" name="voi" v-model="voi" :class="{'good':voi == list[index].voi}"/>
             </div>
       <div>
-        {{list[index].voi}}
+        <span :class="{'hidden': hidden}">{{list[index].voi}}</span>
               </div>
       <div>
       loro
@@ -57,17 +56,20 @@
       <input type="text" name="loro" v-model="loro" :class="{'good':loro == list[index].loro}"/>
             </div>
       <div>
-        {{list[index].loro}}
+        <span :class="{'hidden': hidden}">{{list[index].loro}}</span>
               </div>
-              <button  @click="next()">Next</button>
+
     </div>
-    
+    <button @click="hidden = !hidden">Answers</button>
+    <button @click="next()">Next</button>
+    <button @click="repeat()">Repeat</button>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import {required} from "vuelidate/lib/validators";
+
 export default {
   name: "HelloWorld",
     data() {
@@ -88,7 +90,8 @@ export default {
     lei: "",
     noi: "",
     voi: "",
-    loro: ""
+    loro: "",
+    hidden: true,
   }},
   validations: {
     io: {}
@@ -127,12 +130,73 @@ export default {
                   loro: v.base + "ano"
                 }
               }
+              if(v.coniugation === "1.3")
+              {
+                return {
+                  infinitive: v.infinitive,
+                  io: v.base + "io",
+                  tu: v.base + "i",
+                  lei: v.base + "ia",
+                  noi: v.base + "iamo",
+                  voi: v.base + "iate",
+                  loro: v.base + "iano"
+                }
+              }
+              if(v.coniugation === "1.4")
+              {
+                return {
+                  infinitive: v.infinitive,
+                  io: v.io,
+                  tu: v.tu,
+                  lei: v.lei,
+                  noi: v.noi,
+                  voi: v.voi,
+                  loro: v.loro
+                }
+              }
+              if(v.coniugation === "2.1")
+              {
+                return {
+                  infinitive: v.infinitive,
+                  io: v.base + "o",
+                  tu: v.base + "i",
+                  lei: v.base + "e",
+                  noi: v.base + "iamo",
+                  voi: v.base + "ete",
+                  loro: v.base + "ono"
+                }
+              }
+              if(v.coniugation === "3.1")
+              {
+                return {
+                  infinitive: v.infinitive,
+                  io: v.base + "o",
+                  tu: v.base + "i",
+                  lei: v.base + "e",
+                  noi: v.base + "iamo",
+                  voi: v.base + "ite",
+                  loro: v.base + "ono"
+                }
+              }
         })},
       test() {
-        this.list = this.map2()
+        this.list = this._.shuffle(this.map2())
       },
       next(){
         this.index++;
+        this.io = "",
+        this.tu = "",
+        this.lei = "",
+        this.noi = "",
+        this.voi = "",
+        this.loro = "",
+        this.hidden = true
+      },
+      show(){
+        this.hidden = false
+      },
+      repeat(){
+        this.list.push(this.list[this.index])
       }
   }
 };
@@ -159,4 +223,7 @@ div{
   padding-bottom: 10px
 }
 
+.hidden{
+  visibility:hidden;
+}
 </style>

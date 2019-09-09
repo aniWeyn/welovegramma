@@ -6,6 +6,9 @@ import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
 Vue.config.productionTip = false;
 
+import VueLodash from 'vue-lodash'
+Vue.use(VueLodash)
+
 new Vue({
   router,
   store,
