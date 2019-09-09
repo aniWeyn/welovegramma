@@ -8,7 +8,7 @@
       io
       </div>
       <div>
-      <input type="text" name="io" v-model="io" :class="{'good':io == list[index].io}" />
+      <input type="text" name="io" v-model="io" :class="{'good':io == list[index].io}" class="lowercase"/>
       </div>
       <div>
       <span :class="{'hidden': hidden}">{{list[index].io}}</span>
@@ -17,7 +17,7 @@
       tu
       </div>
       <div>
-      <input type="text" name="tu" v-model="tu" :class="{'good':tu == list[index].tu}"/> 
+      <input type="text" name="tu" v-model="tu" :class="{'good':tu == list[index].tu}" class="lowercase"/> 
             </div>
       <div>
        <span :class="{'hidden': hidden}"> {{list[index].tu}}</span>
@@ -26,7 +26,7 @@
       lui/lei
             </div>
       <div>
-      <input type="text" name="lui/lei" v-model="lei" :class="{'good':lei == list[index].lei}"/>
+      <input type="text" name="lui/lei" v-model="lei" :class="{'good':lei == list[index].lei}" class="lowercase"/>
             </div>
       <div>
        <span :class="{'hidden': hidden}"> {{list[index].lei}}</span>
@@ -35,7 +35,7 @@
       noi
             </div>
       <div>
-      <input type="text" name="noi" v-model="noi" :class="{'good':noi == list[index].noi}" />
+      <input type="text" name="noi" v-model="noi" :class="{'good':noi == list[index].noi}" class="lowercase"/>
             </div>
       <div>
        <span :class="{'hidden': hidden}"> {{list[index].noi}}</span>
@@ -44,7 +44,7 @@
       voi
             </div>
       <div>
-      <input type="text" name="voi" v-model="voi" :class="{'good':voi == list[index].voi}"/>
+      <input type="text" name="voi" v-model="voi" :class="{'good':voi == list[index].voi}" class="lowercase"/>
             </div>
       <div>
         <span :class="{'hidden': hidden}">{{list[index].voi}}</span>
@@ -53,7 +53,7 @@
       loro
             </div>
       <div>
-      <input type="text" name="loro" v-model="loro" :class="{'good':loro == list[index].loro}"/>
+      <input type="text" name="loro" v-model="loro" :class="{'good':loro == list[index].loro}" class="lowercase"/>
             </div>
       <div>
         <span :class="{'hidden': hidden}">{{list[index].loro}}</span>
@@ -225,5 +225,9 @@ div{
 
 .hidden{
   visibility:hidden;
+}
+
+.lowercase{
+  text-transform: lowercase;  
 }
 </style>
